@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ startup }} | Live Billing</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0d1117, #111827, #0f172a);
+            background-size: 300% 300%;
+            animation: bgAnimation 12s infinite;
+            color: #e6edf3;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 25px;
+        }
+
+        @keyframes bgAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0,0,0,0.25);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            margin: 0 0 15px 0;
+            font-size: 32px;
+            font-weight: 600;
+            color: #4da6ff;
+            letter-spacing: 1px;
+        }
+
+        .subtext {
+            font-size: 14px;
+            opacity: 0.65;
+            margin-bottom: 25px;
+        }
+
+        .plate-img {
+            width: 95%;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 2px solid #4da6ff;
+            box-shadow: 0 0 15px rgba(77, 166, 255, 0.3);
+        }
+
+        .data-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            border-radius: 14px;
+            margin-top: 25px;
+            text-align: left;
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.08);
+        }
+
+        .data-row {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .label {
+            color: #94a3b8;
+        }
+
+        .bill-box {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 14px;
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+            font-size: 30px;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.3);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(46,204,113,0.25); }
+            to   { box-shadow: 0 0 20px rgba(46,204,113,0.45); }
+        }
+
+        .refresh-note {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+    </style>
+
+    <!-- Auto-refresh every 5 seconds -->
+    <meta http-equiv="refresh" content="5">
+
+</head>
+<body>
+
+    <div class="container">
+        <h1>ENTRIx – Live Parking Session</h1>
+        <div class="subtext">Real-time billing dashboard for your vehicle</div>
+
+        {% if plate_image %}
+        <img src="{{ plate_image }}" alt="Plate Image" class="plate-img">
+        {% endif %}
+
+        <div class="data-card">
+            <div class="data-row"><span class="label">🚗 Plate Number:</span> <strong>{{ plate }}</strong></div>
+            <div class="data-row"><span class="label">🕒 Entry Time:</span> {{ entry_time }}</div>
+            <div class="data-row"><span class="label">⏱ Current Time:</span> {{ current_time }}</div>
+            <div class="data-row"><span class="label">⌛ Duration:</span> {{ duration }} minutes</div>
+        </div>
+
+        <div class="bill-box">
+            ₹ {{ current_bill }}  
+        </div>
+
+        <div class="refresh-note">
+            Refreshes every 5 seconds • Powered by ENTRIx Smart Parking
+        </div>
+    </div>
+
+</body>
+</html>

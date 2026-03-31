@@ -1,0 +1,6 @@
+train: dataset/images
+val: dataset/images
+
+nc: 1
+names: ["license_plate"]
+
